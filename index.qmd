@@ -1,3 +1,14 @@
 # Introduction {.unnumbered}
 
-This is my online notebook for COMP/STAT112 course taken at [Macalester College](https://www.macalester.edu/).  Please, use the side bar on the left for navigation.
+This is my online notebook for my data science courses taken at [**Macalester College**](https://www.macalester.edu/).  Please, use the side bar on the left for navigation.
+
+
+# About Me
+
+As a **lifelong learner**, my adventures from Afghanistan to China, Qatar, and the USA have been driven by a strong commitment to curiosity, learning, service, innovation, and initiating impactful change.
+
+Equipped with insights from a diverse background in psychology, communication, journalism, marketing, business, cognitive science, epistemology, history, education, theater, Afghan culture, sufism, zen buddhism, and global citizenship, I leverage my knowledge, skills, and real-life experiences to foster a vibrant entrepreneurial and educational ecosystem and serve others.
+
+We all come from unique backgrounds and carry stories that are uniquely ours. **Curiosity** is my beloved guide, helping me learn, ask better questions, practice courage, compassion, and build connections.
+
+

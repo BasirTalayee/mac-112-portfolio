@@ -1,0 +1,15 @@
+{
+  "hash": "e74c4ae1c3f131526846f49acc1bdfc0",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Activity 01\"\n\n\n\n---\n\n::: {.cell}\n\n```{.r .cell-code}\n# Import data\nhikes <- read.csv(\"https://mac-stat.github.io/data/high_peaks.csv\")\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

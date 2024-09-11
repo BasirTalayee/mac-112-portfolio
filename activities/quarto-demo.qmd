@@ -1,5 +1,5 @@
 ---
-title: "My first Quarto document"
+title: "My first Quarto Document"
 format:
   html:
     toc: true
@@ -13,53 +13,43 @@ format:
 **Macalester College** is in the *Twin Cities*.
 It has:
 
-- four seasons
-- bagpipes
-- delightful students
+- liberal arts education
+- strong intentional students body
+- four seasons and fun 
+- bagpipes and Scottish heritage
+- a reputation for activism
+- a small campus in St. Paul, MN
 
-Check it out for yourself:
-
-![](https://www.macalester.edu/about/wp-content/uploads/sites/191/2019/12/campusmap336.png)
+![MAC MAP](https://www.macalester.edu/about/wp-content/uploads/sites/191/2019/12/campusmap336.png)
 
 
 
 \
 \
-
-
 
 
 # Exercise 1: Deduce Quarto features
 
-Check out the appearance and contents of this document. Thoughts?
+`*`.  *this makes the writing italic*
 
-In the toolbar at the top of this document, **Render** the .qmd file into a .html file. Where is this file stored? Thoughts about its appearance / contents? Can you edit it?
+`**`.  **this makes the writing bold**
 
-Toggling between the .qmd and .html files, explain the purpose of the following features in the .qmd file:        
+`#`.  # this makes the writing in a headline - start a new title
 
-`*`
-
-`**`
-
-`#`
-
-`-`
-
-`\`
-
-`![](url)`
+`-`   - this make a bullet point
 
 
+`\`.       #This make a new line and add space
 
+`This is a test`.     # this create a cray highlight
+
+`![](url)`. #![The descrition of the image goes here]
 
 
 
 \
 \
 \
-
-
-
 
 # Exercise 2: Code
 
@@ -68,18 +58,13 @@ How does this appear in the .qmd? The .html? So...?!
 
 seq(from = 100, to = 1000, by = 50)
 
-
-
-
-
-
+```{r}
+seq(from = 100, to = 1000, by = 50)
+```
 
 
 
 \
-\
-\
-
 
 
 # Exercise 3: Chunks

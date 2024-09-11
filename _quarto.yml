@@ -3,20 +3,23 @@ project:
   output-dir: docs
 
 book:
-  title: "COMP/STAT112 Notebook"
-  author: "Basir Talayee"
+  title: "Data Science Portfolio"
+  author: "**Basir Talayee**"
   date: "09/06/2024"
   reader-mode: true
+   
+ 
+
   
   chapters:
     - index.qmd
-
     - part: activities/README.qmd
       chapters: 
       - activities/activity-01.qmd
       - activities/activity-02.qmd
       - activities/activity-03.qmd
       - activities/quarto-demo.qmd
+      - activities/03-univariate-viz-notes.qmd
       
     
     - part: refelections/README.qmd
@@ -35,6 +38,8 @@ format:
     code-copy: true
     code-line-numbers: true
     code-tools: true
+    css: styles.css  # Add this line to include your custom CSS file
+
 
 execute:
   cache: true
