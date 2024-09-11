@@ -38,7 +38,7 @@ format:
     code-copy: true
     code-line-numbers: true
     code-tools: true
-    css: styles.css  # Add this line to include your custom CSS file
+    css: styles.css  # Add this line to include your custom CSS files
 
 
 execute:
