@@ -20,7 +20,7 @@ h1, h2, h3 {
 
 /* Modify links */
 a {
-  color: #00008B;  /* Dark blue color for links to stand out */
+  color: #0000FF;  /* Dark blue color for links to stand out */
   text-decoration: none; /* Remove underline from links */
 }
 
@@ -39,4 +39,11 @@ blockquote {
   padding: 10px;
   margin: 10px 0;
   font-style: italic;  /* Italicize blockquote text */
+}
+
+.right-align-image {
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+  width: 200px; /* Adjust width as needed */
 }
