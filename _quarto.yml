@@ -15,11 +15,10 @@ book:
     - index.qmd
     - part: activities/README.qmd
       chapters: 
-      - activities/activity-01.qmd
-      - activities/activity-02.qmd
-      - activities/activity-03.qmd
       - activities/quarto-demo.qmd
       - activities/03-univariate-viz-notes.qmd
+      - activities/Bivariate_viz.qmd
+      - activities/multivariate_viz.qmd
       
     
     - part: refelections/README.qmd
