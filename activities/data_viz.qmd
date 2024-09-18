@@ -18,6 +18,7 @@ number-sections: true
 
 
 ::: {.callout-note title="Additional Resources"}
+
 For more information about the topics covered in this chapter, refer to the resources below:
 
 -   [Intro to ggplot (YouTube)](https://www.youtube.com/watch?v=0OtY38LVy-o&list=PLyEH7o09I467e8zck95awweg_bGuLzqjz&index=6) by Lisa Lendway
@@ -26,6 +27,7 @@ For more information about the topics covered in this chapter, refer to the reso
 -   [Data visualization (html)](https://r4ds.hadley.nz/data-visualize.html) by Wickham, Çetinkaya-Rundel, & Grolemund
 -   [Visualizing distributions (html)](https://clauswilke.com/dataviz/histograms-density-plots.html) by Wilke
 -   [ggplot cheatsheet (pdf)](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)
+
 :::
 
 
@@ -69,14 +71,12 @@ The data below includes information on hiking trails in the 46 "high peaks" in t
 ```{r}
 # Import data
 hikes <- read.csv("https://mac-stat.github.io/data/high_peaks.csv")
-head(hikes,5)
 ```
 
 ::: {.callout-warning title="Discussion"}
 
 1. What is the pattern / trend of `elevation` of hiking trails?
 2. What is the relationship between a hike's `elevation` and typical `time` it takes to summit / reach the top?
-
 
 :::
 
@@ -193,7 +193,6 @@ Let's dig into the `hikes` data, starting with the `elevation` and difficulty `r
 
 ```{r}
 head(hikes)
-str(hikes)
 ```
 
 a.  What features would we like a visualization of the *categorical* difficulty `rating` variable to capture?
@@ -673,4 +672,3 @@ ggplot(hikes, aes(x = elevation)) +
 
 
 </details>
-
