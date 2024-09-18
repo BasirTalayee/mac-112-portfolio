@@ -228,7 +228,7 @@ Consider some specific research questions about the difficulty `rating` of the h
 
 All of these questions can be answered with: (1) a **bar chart**; of (2) the *categorical* data recorded in the `rating` column. First, set up the plotting **frame**:
 
-```{r eval = FALSE}
+```{r eval = TRUE}
 ggplot(hikes, aes(x = rating))
 ```
 
