@@ -3,7 +3,7 @@
 This is my online notebook for my data science courses taken at [**Macalester College**](https://www.macalester.edu/).  Please, use the side bar on the left for navigation.
 
 
-# About Me
+# Intor
 
 As a **lifelong learner**, my adventures from Afghanistan to China, Qatar, and the USA have been driven by a strong commitment to curiosity, learning, service, innovation, and initiating impactful change.
 
