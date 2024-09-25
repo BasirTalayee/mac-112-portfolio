@@ -9,7 +9,6 @@ book:
   reader-mode: true
    
  
-
   
   chapters:
     - index.qmd
@@ -19,6 +18,7 @@ book:
       - activities/data_viz.qmd
       - activities/Bivariate_viz.qmd
       - activities/multivariate_viz.qmd
+      - activities/spatial_viz.qmd
       
     
     - part: refelections/README.qmd

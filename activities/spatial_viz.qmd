@@ -359,8 +359,13 @@ head(starbucks)
 
 Let's focus on only those in Minnesota for now:
 
-```{r}
+```{r }
 # Don't worry about the syntax
+library(tidyverse)
+starbucks_mn <- starbucks |> 
+  filter(Country == "US", State.Province == "MN")
+
+
 leaflet(data = starbucks_mn) %>% 
   addTiles() %>% 
   addMarkers()
