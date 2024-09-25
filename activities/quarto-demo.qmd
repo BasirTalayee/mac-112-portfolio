@@ -1,5 +1,5 @@
 ---
-title: "My first Quarto Document"
+title: "Activity 1"
 format:
   html:
     toc: true

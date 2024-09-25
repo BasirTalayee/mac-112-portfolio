@@ -249,13 +249,13 @@ NOTE:
 -   Not all of these are "good" plots. We're just exploring `ggplot`.
 
 ```{r eval = FALSE}
-# COMMENT on the change in the code and the corresponding change in the plot
+# adding geom_bar() created a bar chart, where the count of occurrences for each unique rating value is displayed on the y-axis.Show frequncey of each rating
 ggplot(hikes, aes(x = rating)) +
   geom_bar()
 ```
 
 ```{r eval = FALSE}
-# COMMENT on the change in the code and the corresponding change in the plot
+# addition of labs(x = "Rating", y = "Number of hikes"). This modifies the axis labels on the plot.
 ggplot(hikes, aes(x = rating)) +
   geom_bar() +
   labs(x = "Rating", y = "Number of hikes")
@@ -264,19 +264,19 @@ ggplot(hikes, aes(x = rating)) +
 ```{r eval = FALSE}
 # COMMENT on the change in the code and the corresponding change in the plot
 ggplot(hikes, aes(x = rating)) +
-  geom_bar(fill = "blue") +
+  geom_bar(fill = "green") +
   labs(x = "Rating", y = "Number of hikes")
 ```
 
 ```{r eval = FALSE}
-# COMMENT on the change in the code and the corresponding change in the plot
+#  the color orange was added to the outer layer
 ggplot(hikes, aes(x = rating)) +
   geom_bar(color = "orange", fill = "blue") +
   labs(x = "Rating", y = "Number of hikes")
 ```
 
 ```{r eval = FALSE}
-# COMMENT on the change in the code and the corresponding change in the plot
+# Theme was added -(theme_minimal()  minimalistic theme with no background annotations.
 ggplot(hikes, aes(x = rating)) +
   geom_bar(color = "orange", fill = "blue")  +
   labs(x = "Rating", y = "Number of hikes") +
@@ -291,13 +291,12 @@ ggplot(hikes, aes(x = rating)) +
 
 Reflect on the `ggplot()` code.
 
--   What's the purpose of the `+`? When do we use it?
-
--   We added the bars using `geom_bar()`? Why "geom"?
-
--   What does `labs()` stand for?
-
--   What's the difference between `color` and `fill`?
+- Purpose of +: It's used to add layers or components (like geom_bar() or labs()) to the ggplot plot.
+- Why "geom": "Geom" stands for "geometric object," specifying the type of plot (e.g., bars, lines, points).
+- labs(): Short for "labels," used to modify axis labels, titles, and legends.
+- color vs. fill:
+-   color: Changes the outline or border color of shapes.
+-   fill: Changes the interior color of shapes (like filling bars).
 
 #### Part b {.unnumbered}
 
