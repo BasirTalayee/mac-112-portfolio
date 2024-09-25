@@ -249,7 +249,6 @@ NOTE:
 -   Not all of these are "good" plots. We're just exploring `ggplot`.
 
 ```{r}
-
 # adding geom_bar() created a bar chart, where the count of occurrences for each unique rating value is displayed on the y-axis.Show frequncey of each rating
 ggplot(hikes, aes(x = rating)) +
   geom_bar()
