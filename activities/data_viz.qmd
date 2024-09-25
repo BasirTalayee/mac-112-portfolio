@@ -254,26 +254,24 @@ ggplot(hikes, aes(x = rating)) +
   geom_bar()
 ```
 
-```{r}
-
-```
 
 
-```{r eval = FALSE}
+
+```{r }
 # addition of labs(x = "Rating", y = "Number of hikes"). This modifies the axis labels on the plot.
 ggplot(hikes, aes(x = rating)) +
   geom_bar() +
   labs(x = "Rating", y = "Number of hikes")
 ```
 
-```{r eval = FALSE}
+```{r }
 # COMMENT on the change in the code and the corresponding change in the plot
 ggplot(hikes, aes(x = rating)) +
   geom_bar(fill = "green") +
   labs(x = "Rating", y = "Number of hikes")
 ```
 
-```{r eval = FALSE}
+```{r }
 #  the color orange was added to the outer layer
 ggplot(hikes, aes(x = rating)) +
   geom_bar(color = "orange", fill = "blue") +

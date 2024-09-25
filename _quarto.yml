@@ -16,7 +16,7 @@ book:
     - part: activities/README.qmd
       chapters: 
       - activities/quarto-demo.qmd
-      - activities/03-univariate-viz-notes.qmd
+      - activities/data_viz.qmd
       - activities/Bivariate_viz.qmd
       - activities/multivariate_viz.qmd
       
