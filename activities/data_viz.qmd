@@ -305,15 +305,19 @@ Reflect on the `ggplot()` code.
 
 In general, bar charts allow us to examine the following properties of a *categorical* variable:
 
--   **observed categories**: What categories did we observe?
--   **variability between categories**: Are observations evenly spread out among the categories, or are some categories more common than others?
+-   **observed categories**: The hikes are categorized as "difficult," "easy," and "moderate." These represent the different difficulty levels of the hikes.
+-   **variability between categories**: The hikes are not evenly distributed. The "moderate" hikes are the most common, with the highest frequency, while "difficult" hikes are the least common, and "easy" hikes fall in between.
+
 
 We must then *translate* this information into the *context* of our analysis, here hikes in the Adirondacks. Summarize below what you learned from the bar chart, in context.
+
+- hikers in the Adirondacks are more likely to encounter moderate hikes than easy or difficult ones
 
 #### Part c {.unnumbered}
 
 Is there anything you don't like about this barplot? For example: check out the x-axis again.
 
+- The labels in the  x-axis again needs to be capitalized. 
 
 
 ### Exercise 6: Sad Bar Chart {.unnumbered}
@@ -330,6 +334,8 @@ Here:
 -   Explain why this might *not* be an effective visualization for this and other quantitative variables. (What questions does / doesn't it help answer?)
 
 ```{r}
+ggplot(hikes, aes(x = elevation))+
+  geom_bar()
 ```
 
 
@@ -337,6 +343,7 @@ Here:
 ### Exercise 7: A Histogram of Elevation {.unnumbered}
 
 Quantitative variables require different viz than categorical variables. Especially when there are many possible outcomes of the quantitative variable. It's typically insufficient to simply count up the number of times we've observed a particular outcome as the bar graph did above. It gives us a sense of ranges and typical outcomes, but not a good sense of how the observations are distributed across this range. We'll explore two methods for graphing quantitative variables: **histograms** and **density plots**.
+
 
 **Histograms** are constructed by (1) dividing up the observed range of the variable into 'bins' of equal width; and (2) counting up the number of cases that fall into each bin. Check out the example below:
 
@@ -346,28 +353,29 @@ Quantitative variables require different viz than categorical variables. Especia
 
 Let's dig into some details.
 
--   How many hikes have an elevation between 4500 and 4700 feet?
--   How many total hikes have an elevation of at least 5100 feet?
+-   How many hikes have an elevation between 4500 and 4700 feet?  It is 6
+-   How many total hikes have an elevation of at least 5100 feet?   1+1 = 2
 
 #### Part b {.unnumbered}
 
 Now the bigger picture. In general, histograms allow us to examine the following properties of a *quantitative* variable:
 
--   **typical outcome:** Where’s the center of the data points? What's typical?
+-   **typical outcome:** Where’s the center of the data points? What's typical?   
 -   **variability & range:** How spread out are the outcomes? What are the max and min outcomes?
 -   **shape:** How are values distributed along the observed range? Is the distribution symmetric, right-skewed, left-skewed, bi-modal, or uniform (flat)?
 -   **outliers:** Are there any outliers, i.e. outcomes that are unusually large/small?
 
 We must then *translate* this information into the *context* of our analysis, here hikes in the Adirondacks. Addressing each of the features in the above list, summarize below what you learned from the histogram, in context.
 
-
+- Answer: 3700 to 5500 feet. Elevations vary from hike to hike relatively normally (with a bell shape) around a typical elevation of roughly 4500 feet.
 
 ### Exercise 8: Building Histograms - Part 1 {.unnumbered}
 
 2-MINUTE CHALLENGE: Thinking of the bar chart code, try to *intuit* what line you can tack on to the below frame of `elevation` to add a histogram layer. Don't forget a `+`. If it doesn't come to you within 2 minutes, *no problem* -- all will be revealed in the next exercise.
 
 ```{r eval = FALSE}
-ggplot(hikes, aes(x = elevation))
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram(binwidth = 50, fill = "red", color = "green")
 ```
 
 
@@ -375,47 +383,48 @@ ggplot(hikes, aes(x = elevation))
 
 Let's build some histograms. Try each chunk below, *one by one*. In each chunk, make a comment about how both the code and the corresponding plot both changed.
 
-```{r eval = FALSE}
-# COMMENT on the change in the code and the corresponding change in the plot
+```{r }
+# Add a histogram layer
+
 ggplot(hikes, aes(x = elevation)) +
-  geom_histogram()
+  geom_histogram(binwidth = 100) 
 ```
 
-```{r eval = FALSE}
-# COMMENT on the change in the code and the corresponding change in the plot
+```{r }
+# Adding white color for the outter layer. 
 ggplot(hikes, aes(x = elevation)) +
-  geom_histogram(color = "white") 
+  geom_histogram(color = "red") 
 ```
 
-```{r eval = FALSE}
-# COMMENT on the change in the code and the corresponding change in the plot
+```{r }
+# Adding blue color for the filling of the graph
 ggplot(hikes, aes(x = elevation)) +
-  geom_histogram(color = "white", fill = "blue") 
+  geom_histogram(color = "red", fill = "blue") 
 ```
 
-```{r eval = FALSE}
-# COMMENT on the change in the code and the corresponding change in the plot
+```{r }
+# Adding lables for X and Y axes. 
 ggplot(hikes, aes(x = elevation)) +
   geom_histogram(color = "white") +
   labs(x = "Elevation (feet)", y = "Number of hikes")
 ```
 
-```{r eval = FALSE}
-# COMMENT on the change in the code and the corresponding change in the plot
+```{r }
+# Increasing the binwidth of the bar by 1000. 
 ggplot(hikes, aes(x = elevation)) +
   geom_histogram(color = "white", binwidth = 1000) +
   labs(x = "Elevation (feet)", y = "Number of hikes")
 ```
 
-```{r eval = FALSE}
-# COMMENT on the change in the code and the corresponding change in the plot
+```{r }
+# Changing the binwidth of the bars by 5, which is very small.
 ggplot(hikes, aes(x = elevation)) +
-  geom_histogram(color = "white", binwidth = 5) +
+  geom_histogram(color = "red", binwidth = 5) +
   labs(x = "Elevation (feet)", y = "Number of hikes")
 ```
 
-```{r eval = FALSE}
-# COMMENT on the change in the code and the corresponding change in the plot
+```{r }
+# Changing the binwidth of the bars by 200. 
 ggplot(hikes, aes(x = elevation)) +
   geom_histogram(color = "white", binwidth = 200) +
   labs(x = "Elevation (feet)", y = "Number of hikes")
@@ -424,12 +433,12 @@ ggplot(hikes, aes(x = elevation)) +
 
 ### Exercise 10: Histogram Follow-up {.unnumbered}
 
--   What function added the histogram layer / geometry?
--   What's the difference between `color` and `fill`?
--   Why does adding `color = "white"` improve the visualization?
--   What did `binwidth` do?
--   Why does the histogram become ineffective if the `binwidth` is too big (e.g. 1000 feet)?
--   Why does the histogram become ineffective if the `binwidth` is too small (e.g. 5 feet)?
+-   What function added the histogram layer / geometry? geom_histogram()
+-   What's the difference between `color` and `fill`?  color outlined the bars and fill filled them
+-   Why does adding `color = "white"` improve the visualization?  easier to distinguish between the bars
+-   What did `binwidth` do?   changed the bin width
+-   Why does the histogram become ineffective if the `binwidth` is too big (e.g. 1000 feet)?  we lump too many hikes together and lose track of the nuances
+-   Why does the histogram become ineffective if the `binwidth` is too small (e.g. 5 feet)?  we don’t lump enough hikes together and lose track of the bigger picture trends
 
 
 ### Exercise 11: Density Plots {.unnumbered}
@@ -438,9 +447,9 @@ ggplot(hikes, aes(x = elevation)) +
 
 Check out a density plot of elevation. Notice that the y-axis (density) has no contextual interpretation -- it's a relative measure. The *higher* the density, the more *common* are elevations in that range.
 
-```{r eval = FALSE}
+```{r }
 ggplot(hikes, aes(x = elevation)) +
-  geom_density()
+  geom_density( fill = "red")
 ```
 
 **Questions**
@@ -453,6 +462,8 @@ ggplot(hikes, aes(x = elevation)) +
 -   TRY IT! Test out those lines in the chunk below. Was your intuition correct?
 
 ```{r}
+ggplot(hikes, aes(x=elevation))+
+  geom_density(fill="orange", color = "blue")
 ```
 
 -   Examine the density plot. How does it compare to the histogram? What does it tell you about the *typical* elevation, *variability / range* in elevations, and *shape* of the distribution of *elevations* within this range?
@@ -462,6 +473,14 @@ ggplot(hikes, aes(x = elevation)) +
 ### Exercise 12: Density Plots vs Histograms {.unnumbered}
 
 The histogram and density plot both allow us to visualize the behavior of a quantitative variable: typical outcome, variability / range, shape, and outliers. What are the pros/cons of each? What do you like/not like about each?
+
+**Histograms:**
+- Pros: Easy to understand; shows actual counts.
+- Cons: Bin size can distort the data.
+**Density Plots:**
+- Pros: Smooth, continuous view of distribution; good for comparisons.
+- Cons: Less intuitive; can hide actual data points.
+
 
 
 ### Exercise 13: Code = communication {.unnumbered}
@@ -491,186 +510,3 @@ ggplot(hikes, aes(x = elevation)) + geom_histogram(color = "white", binwidth = 2
 ```
 
 
-### Exercise 14: Practice {.unnumbered}
-
-#### Part a {.unnumbered}
-
-Practice your viz skills to learn about some of the variables in one of the following datasets from the previous class:
-
-```{r}
-# Data on students in this class
-survey <- read.csv("https://ajohns24.github.io/data/112/about_us_2024.csv")
-
-# World Cup data
-world_cup <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-29/worldcups.csv")
-```
-
-#### Part b {.unnumbered}
-
-Check out the [RStudio Data Visualization cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf) to learn more features of `ggplot`.
-
-::: {.callout-warning title="Check → Commit → Push"}
-When done, don't forgot to click **Render Book** and check the resulting HTML files. If happy, jump to GitHub Desktop and commit the changes with the message **Finish activity 3** and push to GitHub.  Wait few seconds, then visit your portfolio website and make sure the changes are there.
-:::
-
-## Solutions
-
-<details>
-
-<summary>Click for Solutions</summary>
-
-### Exercise 1: Research Questions {.unnumbered}
-
-a.  For example: how many hikes are there in each category? are any categories more common than others?
-b.  For example: What's a typical elevation? What's the range in elevations?
-
-
-
-### Exercise 3: Bar Chart of Ratings - Part 1 {.unnumbered}
-
-```{r}
-ggplot(hikes, aes(x = rating))
-```
-
--   just a blank canvas
--   name of the dataset
--   indicate which variable to plot on x-axis
--   `aes`thetics
-
-
-
-### Exercise 4: Bar Chart of Ratings - Part 2 {.unnumbered}
-
-```{r}
-# Add a bar plot LAYER
-ggplot(hikes, aes(x = rating)) +
-  geom_bar()
-
-# Add meaningful axis labels
-ggplot(hikes, aes(x = rating)) +
-  geom_bar() +
-  labs(x = "Rating", y = "Number of hikes")
-
-# FILL the bars with blue
-ggplot(hikes, aes(x = rating)) +
-  geom_bar(fill = "blue") +
-  labs(x = "Rating", y = "Number of hikes")
-
-# COLOR the outline of the bars in orange
-ggplot(hikes, aes(x = rating)) +
-  geom_bar(color = "orange", fill = "blue") +
-  labs(x = "Rating", y = "Number of hikes")
-
-# Change the theme to a white background
-ggplot(hikes, aes(x = rating)) +
-  geom_bar(color = "orange", fill = "blue")  +
-  labs(x = "Rating", y = "Number of hikes") + 
-  theme_minimal()
-```
-
-
-### Exercise 5: Bar Chart Follow-up {.unnumbered}
-
-#### Part a {.unnumbered}
-
--   To indicate we're still adding layers to / modifying our plot.
--   Bars are the `geom`etric elements we're adding in this layer.
--   labels
--   `fill` fills in the bars. `color` outlines the bars.
-
-#### Part b {.unnumbered}
-
-Most hikes are moderate, the fewest number are difficult.
-
-#### Part c {.unnumbered}
-
-I don't like that the categories are alphabetical, not in order of difficulty level.
-
-
-
-### Exercise 6: Sad Bar Chart {.unnumbered}
-
-There are too many different outcomes of elevation.
-
-```{r}
-ggplot(hikes, aes(x = elevation)) + 
-  geom_bar()
-```
-
-
-
-### Exercise 7: A Histogram of Elevation {.unnumbered}
-
-#### Part a {.unnumbered}
-
--   6
--   1 + 1 = 2
-
-#### Part b {.unnumbered}
-
-Elevations range from roughly 3700 to 5500 feet. Elevations vary from hike to hike relatively *normally* (with a bell shape) around a typical elevation of roughly 4500 feet.
-
-
-
-### Exercise 9: Building Histograms - Part 2 {.unnumbered}
-
-```{r}
-# Add a histogram layer
-ggplot(hikes, aes(x = elevation)) +
-  geom_histogram()
-
-# Outline the bars in white
-ggplot(hikes, aes(x = elevation)) +
-  geom_histogram(color = "white") 
-
-# Fill the bars in blue
-ggplot(hikes, aes(x = elevation)) +
-  geom_histogram(color = "white", fill = "blue") 
-
-# Add axis labels
-ggplot(hikes, aes(x = elevation)) +
-  geom_histogram(color = "white") +
-  labs(x = "Elevation (feet)", y = "Number of hikes")
-
-# Change the width of the bins to 1000 feet
-ggplot(hikes, aes(x = elevation)) +
-  geom_histogram(color = "white", binwidth = 1000) +
-  labs(x = "Elevation (feet)", y = "Number of hikes")
-
-# Change the width of the bins to 5 feet
-ggplot(hikes, aes(x = elevation)) +
-  geom_histogram(color = "white", binwidth = 5) +
-  labs(x = "Elevation (feet)", y = "Number of hikes")
-
-# Change the width of the bins to 200 feet
-ggplot(hikes, aes(x = elevation)) +
-  geom_histogram(color = "white", binwidth = 200) +
-  labs(x = "Elevation (feet)", y = "Number of hikes")
-```
-
-
-### Exercise 10: Histogram Follow-up {.unnumbered}
-
--   `geom_histogram()`
--   `color` outlined the bars and `fill` filled them
--   easier to distinguish between the bars
--   changed the bin width
--   we lump too many hikes together and lose track of the nuances
--   we don't lump enough hikes together and lose track of the bigger picture trends
-
-
-### Exercise 11: Density plots {.unnumbered}
-
-```{r}
-ggplot(hikes, aes(x = elevation)) +
- geom_density(color = "blue", fill = "orange")
-```
-
-
-### Exercise 13: Code = Communication {.unnumbered}
-
--   Clarifies that the subsequent lines are a continuation of the first. That is, we're not done with the plot yet. These lines are all part of the same idea.
--   This is like a run-on sentence. It's tough to track the distinct steps that go into building the plot.
-
-
-</details>
