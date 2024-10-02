@@ -23,7 +23,6 @@ For more information about the topics covered in this chapter, refer to the reso
 -   [A Grammar for Data Wrangling (html)](https://mdsr-book.github.io/mdsr2e/ch-dataI.html) by Baumer, Kaplan, and Horton
 :::
 
-{{< include activity-instructions.qmd >}}
 
 ## Data Wrangling Motivation
 
@@ -159,7 +158,7 @@ select(elections, c(state_name, county_name, dem_pct_20, dem_pct_16))
 
 Let's re-do this with the **pipe function** `|>`:
 
-```{r eval = FALSE}
+```{r val = FALSE }
 elections |> 
   select(state_name, county_name, dem_pct_20, dem_pct_16)
 ```
@@ -184,12 +183,12 @@ elections |>
 
 Let's `filter()` out only the *rows* related to Minnesota (MN):
 
-```{r eval = FALSE}
+```{r val = FALSE }
 # Without a pipe
 filter(elections, state_name == "Minnesota")
 ```
 
-```{r eval = FALSE}
+```{r val = FALSE}
 # With a pipe
 elections |> 
   filter(state_name == "Minnesota")
@@ -205,13 +204,13 @@ We use `a == b` to check whether `a` *matches* `b`.
 
 We use `a = b` to *define* that `a` is equal to `b`. We typically use `=` for this purpose inside a function, and `<-` for this purpose outside a function.
 
-```{r}
+```{r val = FALSE}
 # Ex: "=" defines x
 x = 2
 x
 ```
 
-```{r}
+```{r val = FALSE}
 # Ex: "==" checks whether x is/matches 3
 x == 3
 ```
@@ -226,24 +225,24 @@ x == 3
 
 Let's *combine* `select()` and `filter()` to create a new dataset with info about the county names, and 2020 and 2016 Democratic support among Minnesota counties.
 
-```{r eval = FALSE}
+```{r val = FALSE}
 # Without pipes
 filter(select(elections, c(state_name, county_name, dem_pct_20, dem_pct_16)), state_name == "Minnesota")
 ```
 
-```{r eval = FALSE}
+```{r val = FALSE}
 # With pipes: all verbs in 1 row
 elections |> select(state_name, county_name, dem_pct_20, dem_pct_16) |> filter(state_name == "Minnesota")
 ```
 
-```{r eval = FALSE}
+```{r val = FALSE}
 # With pipes: each verb in a new row
 elections |> 
   select(state_name, county_name, dem_pct_20, dem_pct_16) |> 
   filter(state_name == "Minnesota")
 ```
 
-```{r eval = FALSE}
+```{r val = FALSE}
 # We can even do this with UN-tidyverse code in "base" R
 elections[elections$state_name == "Minnesota", c(1, 4, 8, 12)]
 ```
@@ -265,7 +264,7 @@ Why will we typically use:
 
 Sometimes, the order of operations matters. For example: putting on socks, then shoes produces a different result than putting on shoes, then socks. Sometimes order doesn't matter. For example: Pouring cereal into a bowl, then adding milk produces the same result as pouring milk into a bowl, then adding cereal (though one order is obviously better than the other ;)) Above (also copied below), we `select`ed some columns and then `filter`ed some rows:
 
-```{r eval = FALSE}
+```{r val = FALSE }
 elections |> 
   select(state_name, county_name, dem_pct_20, dem_pct_16) |> 
   filter(state_name == "Minnesota")
@@ -273,9 +272,12 @@ elections |>
 
 Would we get the same result if we reversed `select()` and `filter()`? Think first, then try it.
 
-```{r}
-# Try it
+```{r eval = FALSE }
+Part c
+It’s more “computationally efficient” to get rid of some rows before arranging.
 
+Part e
+We can’t select a variable before we define it!
 ```
 
 \
@@ -290,7 +292,7 @@ Typically:
 -   We want to store our data wrangling results.
 -   It's good practice to do so under a *new* name. We want to preserve, thus don't want to *overwrite*, the original data (especially if our code contains errors!!).
 
-```{r}
+```{r eval = FALSE}
 # Store the results
 mn <- elections |> 
   select(state_name, county_name, dem_pct_20, dem_pct_16) |> 
@@ -315,11 +317,11 @@ Use `select()` to create a simplified dataset that we'll use throughout the exer
 
 ```{r}
 # Define elections_small
-#___ <- ___ |>
-#  ___(___)
+elections_small <- elections |> 
+  select(state_name, county_name, total_votes_20, repub_pct_20, dem_pct_20, total_votes_16, dem_pct_16)
 
 # Check out the first 6 rows to confirm your code did what you think it did!
-
+head(elections_small)
 ```
 
 \

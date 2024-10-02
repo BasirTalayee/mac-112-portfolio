@@ -21,6 +21,7 @@ book:
       - activities/spatial_viz.qmd
       - activities/wrangling_verbs.qmd
       
+      
     
     - part: refelections/README.qmd
       chapters: 
