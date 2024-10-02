@@ -19,6 +19,7 @@ book:
       - activities/Bivariate_viz.qmd
       - activities/multivariate_viz.qmd
       - activities/spatial_viz.qmd
+      - activities/wrangling_verbs.qmd
       
     
     - part: refelections/README.qmd
