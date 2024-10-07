@@ -9,23 +9,7 @@ fig-align: center
 code-fold: false
 ---
 
-::: {.callout-caution title="Learning Goals"}
--   Understand what it means to "reshape" data.
--   Understand the difference between *wide* and *long* data formats.
--   Be able to distinguish the units of observation for a given data set.
--   Explore how to reshape data using `pivot_wider()` and `pivot_longer()` in the `tidyr` package
-:::
 
-::: {.callout-note title="Additional Resources"}
-For more information about the topics covered in this chapter, refer to the resources below:
-
--   [Demonstrating pivoting (YouTube)](https://www.youtube.com/watch?v=k3SZ8keibuQ&feature=youtu.be) by Lisa Lendway
--   [Pivoting vignette (html)](https://tidyr.tidyverse.org/articles/pivot.html) by tidyr
--   [Pivoting (html)](https://r4ds.hadley.nz/data-tidy.html#sec-pivoting) by Wickham and Grolemund
--   [Reshaping data](https://mdsr-book.github.io/mdsr2e/ch-dataII.html#reshaping-data) by Baumer, Kaplan, and Horton
-:::
-
-{{< include activity-instructions.qmd >}}
 
 
 
@@ -127,7 +111,8 @@ Let's calculate the *difference* in average body mass, male vs female, for each 
 -   Identify the units of observation.
 
 ```{r}
-penguin_avg
+str(penguin_avg)
+head(penguin_avg)
 ```
 
 \
@@ -166,7 +151,10 @@ With the goal of being able to calculate the *difference* in average body mass, 
 penguin_avg |\> pivot_wider(names_from = sex, values_from = avg_body_mass)
 
 ```{r}
+penguin_avg |> pivot_wider(names_from = sex, values_from = avg_body_mass)
+
 ```
+
 
 ::: {.callout-note title="Pivot Wider"}
 
@@ -248,6 +236,7 @@ food
 The units of observation in `food` are customer / restaurant combinations. Wrangle this data so that the units of observation are customers, spreading the restaurants into separate columns.
 
 ```{r}
+
 ```
 
 Consider 2 more customers:
@@ -282,7 +271,6 @@ Consider data on a sleep study in which subjects received only 3 hours of sleep 
 
 ```{r}
 sleep_wide <- read.csv("https://mac-stat.github.io/data/sleep_wide.csv")
-
 head(sleep_wide)
 ```
 
@@ -308,6 +296,10 @@ How can you obtain the dataset you sketched in part b?
 \
 \
 \
+```{r }
+
+```
+
 
 ### Exercise 2: Pivot longer {.unnumbered}
 
@@ -324,6 +316,8 @@ To plot reaction time by day for each subject, we need to reshape the data into 
 Use `pivot_longer()` to create the long-format dataset above. Show the first 3 lines (`head(3)`), which should be *similar* to those above. Follow-up: Thinking forward to plotting reaction time vs day for each subject, what would you like to fix / change about this dataset?
 
 ```{r}
+
+str(sleep_wide)
 # For cols, try 2 appproaches: using - and starts_with
 # ___ |> 
 #   pivot_longer(cols = ___, names_to = "___", values_to = "___")
