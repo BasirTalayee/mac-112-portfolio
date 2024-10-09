@@ -49,3 +49,10 @@ blockquote {
   margin-right: 0;
   width: 200px; /* Adjust width as needed */
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+  width: 8in;  /* Set the desired figure width */
+  height: 8in; /* Set the desired figure height */
+}
