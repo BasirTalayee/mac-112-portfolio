@@ -1,5 +1,5 @@
 ---
-title: "Data viz"
+title: "Data Visualization"
 number-sections: true
 ---
 
@@ -193,6 +193,7 @@ Let's dig into the `hikes` data, starting with the `elevation` and difficulty `r
 
 ```{r}
 head(hikes)
+library(tidyverse)
 ```
 
 a.  What features would we like a visualization of the *categorical* difficulty `rating` variable to capture?
@@ -227,16 +228,23 @@ Consider some specific research questions about the difficulty `rating` of the h
 
 All of these questions can be answered with: (1) a **bar chart**; of (2) the *categorical* data recorded in the `rating` column. First, set up the plotting **frame**:
 
-```{r eval = FALSE}
+```{r }
 ggplot(hikes, aes(x = rating))
+ggplot(hikes, aes(x= rating))
 ```
 
 Think about:
 
--   What did this do? What do you observe?
+-   What did this do? What do you observe?  
 -   What, in general, is the first argument of the `ggplot()` function?
 -   What is the purpose of writing `x = rating`?
 -   What do you think `aes` stands for?!?
+
+Refelection:
+
+-  ggplot(hikes, aes(x= rating)), it initialize ggplot object and the data set is hike. 
+-  It sets aesthetic mapping (aes), set the x-axis to be rating 
+-  It is missing the geometry (like geom_bar, historgram and point). It means that it set a plot but nothing will be drawn. 
 
 
 ### Exercise 4: Bar Chart of Ratings - Part 2 {.unnumbered}
@@ -266,9 +274,13 @@ ggplot(hikes, aes(x = rating)) +
 
 ```{r }
 # COMMENT on the change in the code and the corresponding change in the plot
-ggplot(hikes, aes(x = rating)) +
-  geom_bar(fill = "green") +
-  labs(x = "Rating", y = "Number of hikes")
+ggplot(hikes, aes(x=rating)) + geom_bar(fill= "green") + labs (x= "Rating", y = "Number of Hikes")
+```
+
+
+```{r}
+# This time, lets change the code in way that it use different colors for each rating catagory. 
+ggplot(hikes, aes(x=rating, fill = rating )) + geom_bar() + labs (x= "Rating", y = "Number of Hikes")
 ```
 
 ```{r }
@@ -276,14 +288,24 @@ ggplot(hikes, aes(x = rating)) +
 ggplot(hikes, aes(x = rating)) +
   geom_bar(color = "orange", fill = "blue") +
   labs(x = "Rating", y = "Number of hikes")
+
+ggplot(hikes, aes(x= rating, fill = rating)) + geom_bar(color = "red") + labs (x= "Rating", y = "Number of Hikes")
 ```
 
-```{r eval = TRUE}
+```{r}
 # Theme was added -(theme_minimal()  minimalistic theme with no background annotations.
 ggplot(hikes, aes(x = rating)) +
-  geom_bar(color = "orange", fill = "blue")  +
+  geom_bar(colour = "orange", fill = "blue")  +
   labs(x = "Rating", y = "Number of hikes") +
   theme_minimal()
+```
+```{r}
+# In this version, we theme and element_rect to change the backfround of the whole graph to new color or light blue. 
+ggplot(hikes, aes(x = rating)) +
+  geom_bar(fill = "blue")  +
+  labs(x = "Rating", y = "Number of hikes") +
+  theme(panel.background = element_rect(fill = "gray"))+
+  theme(plot.background = element_rect(fill = "lightblue"))
 ```
 
 
@@ -337,12 +359,12 @@ Here:
 ggplot(hikes, aes(x = elevation))+
   geom_bar()
 ```
-
+This is not an effective because for continuous data, bar chart is not the best option becuse it dose not show pattern, trends and distribution. Bar chart is good for catagorical data. 
 
 
 ### Exercise 7: A Histogram of Elevation {.unnumbered}
 
-Quantitative variables require different viz than categorical variables. Especially when there are many possible outcomes of the quantitative variable. It's typically insufficient to simply count up the number of times we've observed a particular outcome as the bar graph did above. It gives us a sense of ranges and typical outcomes, but not a good sense of how the observations are distributed across this range. We'll explore two methods for graphing quantitative variables: **histograms** and **density plots**.
+Quantitative variables require different viz than categorical variables. Especially when there are many possible outcomes of the quantitative variable. It's typically insufficient to simply count up the number of times we've observed a particular outcome as the bar graph did above. *It gives us a sense of ranges and typical outcomes, but not a good sense of how the observations are distributed across this range.* We'll explore two methods for graphing quantitative variables: **histograms** and **density plots**.
 
 
 **Histograms** are constructed by (1) dividing up the observed range of the variable into 'bins' of equal width; and (2) counting up the number of cases that fall into each bin. Check out the example below:
@@ -373,9 +395,12 @@ We must then *translate* this information into the *context* of our analysis, he
 
 2-MINUTE CHALLENGE: Thinking of the bar chart code, try to *intuit* what line you can tack on to the below frame of `elevation` to add a histogram layer. Don't forget a `+`. If it doesn't come to you within 2 minutes, *no problem* -- all will be revealed in the next exercise.
 
-```{r eval = FALSE}
+```{r }
+# adding a histogrm layer here. 
 ggplot(hikes, aes(x = elevation)) +
-  geom_histogram(binwidth = 50, fill = "red", color = "green")
+  geom_histogram(binwidth = 50, fill = "darkorange", color = "red") 
+
+        
 ```
 
 
@@ -384,20 +409,22 @@ ggplot(hikes, aes(x = elevation)) +
 Let's build some histograms. Try each chunk below, *one by one*. In each chunk, make a comment about how both the code and the corresponding plot both changed.
 
 ```{r }
-# Add a histogram layer
-
+# well in this one, I tried to a lot of things to play around with code, title, change background and lables.
 ggplot(hikes, aes(x = elevation)) +
-  geom_histogram(binwidth = 100) 
+  geom_histogram(binwidth = 100, fill = "red") +  
+    labs(x= "Elevation (feet)", y= "Number of Hikes", title = "Number of Hikes Based on Elevation") +
+  theme(plot.title = element_text(hjust = 0.5, vjust = 1, size = 13, face = "bold", color = "blue"), 
+        panel.background = element_rect(fill = "khaki"), plot.background = element_rect(fill = "lightgreen"))
 ```
 
 ```{r }
 # Adding white color for the outter layer. 
 ggplot(hikes, aes(x = elevation)) +
-  geom_histogram(color = "red") 
+  geom_histogram(color = "white") 
 ```
 
 ```{r }
-# Adding blue color for the filling of the graph
+# Adding blue color for the filling of the graph and red for outer layer
 ggplot(hikes, aes(x = elevation)) +
   geom_histogram(color = "red", fill = "blue") 
 ```
@@ -437,9 +464,8 @@ ggplot(hikes, aes(x = elevation)) +
 -   What's the difference between `color` and `fill`?  color outlined the bars and fill filled them
 -   Why does adding `color = "white"` improve the visualization?  easier to distinguish between the bars
 -   What did `binwidth` do?   changed the bin width
--   Why does the histogram become ineffective if the `binwidth` is too big (e.g. 1000 feet)?  we lump too many hikes together and lose track of the nuances
--   Why does the histogram become ineffective if the `binwidth` is too small (e.g. 5 feet)?  we don’t lump enough hikes together and lose track of the bigger picture trends
-
+-   Why does the histogram become ineffective if the `binwidth` is too big (e.g. 1000 feet)?  It put too many hikes together and lose track of the nuances and details
+-   Why does the histogram become ineffective if the `binwidth` is too small (e.g. 5 feet)?  we don’t lump enough hikes together and lose track of the bigger picture trends and patterns. We get lost in details. 
 
 ### Exercise 11: Density Plots {.unnumbered}
 
@@ -448,18 +474,20 @@ ggplot(hikes, aes(x = elevation)) +
 Check out a density plot of elevation. Notice that the y-axis (density) has no contextual interpretation -- it's a relative measure. The *higher* the density, the more *common* are elevations in that range.
 
 ```{r }
+
+# chaning the color to red and outer color to blue. 
 ggplot(hikes, aes(x = elevation)) +
-  geom_density( fill = "red")
+  geom_density( fill = "red", color = "blue")
 ```
 
 **Questions**
 
 -   INTUITION CHECK: Before tweaking the code and thinking back to `geom_bar()` and `geom_histogram()`, how do you *anticipate* the following code will change the plot?
 
-    -   `geom_density(color = "blue")`
-    -   `geom_density(fill = "orange")`
+    -   `geom_density(color = "blue")`.  color changes the outer layer
+    -   `geom_density(fill = "orange")`.   fill changes the inside. 
 
--   TRY IT! Test out those lines in the chunk below. Was your intuition correct?
+-   My intuition was correct, that works accross the other graphs. 
 
 ```{r}
 ggplot(hikes, aes(x=elevation))+
@@ -487,15 +515,18 @@ The histogram and density plot both allow us to visualize the behavior of a quan
 
 We *obviously* won't be done until we talk about communication. All code above has a similar *general* structure (where the details can change):
 
-```{r eval = FALSE}
-ggplot(___, aes(x = ___)) + 
-  geom___(color = "___", fill = "___") + 
-  labs(x = "___", y = "___")
+```{r }
+ggplot(hikes, aes (x = elevation, y = difficulty)) +
+  geom_point(color = "red", fill = "blue") + 
+  geom_line(color = "blue")
+  labs(x = "Elevation", y = "Difficulty", title = "Hike difficulty as the evalivation incease")
 ```
 
 -   Though not *necessary* to the code working, it's common, good practice to *indent* or *tab* the lines of code after the first line (counterexample below). Why?
 
-```{r eval = FALSE}
+- **Answer:** It is important to clarify the sublines or part of the code for clear reading. 
+
+```{r }
 # YUCK
 ggplot(hikes, aes(x = elevation)) +
 geom_histogram(color = "white", binwidth = 200) +
@@ -503,10 +534,15 @@ labs(x = "Elevation (feet)", y = "Number of hikes")
 ```
 
 -   Though not *necessary* to the code working, it's common, good practice to put a *line break* after each `+` (counterexample below). Why?
+This is like a run-on sentence. It’s tough to track the distinct steps that go into building the plot.
 
-```{r eval = FALSE}
+```{r }
 # YUCK 
-ggplot(hikes, aes(x = elevation)) + geom_histogram(color = "white", binwidth = 200) + labs(x = "Elevation (feet)", y = "Number of hikes")
+ggplot(hikes, aes(x = elevation)) + 
+  geom_histogram(color = "black", fill = "orange", binwidth = 200) + 
+  labs(x = "Elevation (feet)", y = "Number of hikes", title = "Number of Hikes Based on Elevation")+
+  theme(panel.background = element_rect(fill = "lightpink"),
+        plot.background = element_rect(fill = "lightgreen"))
 ```
 
 
