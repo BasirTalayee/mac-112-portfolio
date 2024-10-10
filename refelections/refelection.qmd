@@ -98,3 +98,19 @@ Now the bigger picture. In general, histograms allow us to examine the following
 - Pros: Smooth, continuous view of distribution; good for comparisons.
 - Cons: Less intuitive; can hide actual data points.
 
+-   **Identify simple research questions.**\
+    What do you want to understand about the variables or the relationships among them?
+
+-   **Start with the basics and work incrementally.**
+    -   Identify what variables you want to include in your plot and what structure these have (eg: categorical, quantitative, dates)
+    -   Start simply. Build a plot of just 1 of these variables, or the relationship between 2 of these variables.
+    -   Set up a plotting frame and add just **one geometric layer at a time**.
+    -   Start tweaking: add whatever new variables you want to examine,
+
+-   **Ask your plot questions.**
+    -   What questions *does* your plot answer? What questions are left *unanswered* by your plot?
+    -   What *new* questions does your plot spark / inspire?
+    -   Do you have the viz tools to answer these questions, or might you learn more?
+
+-   **Focus.**\
+    Reporting a large number of visualizations can overwhelm the audience and obscure your conclusions. Instead, pick out a focused yet comprehensive set of visualizations.

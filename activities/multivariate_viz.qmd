@@ -11,12 +11,6 @@ fig-align: center
 code-fold: false
 
 ---
-```{r}
-#| fig-width: 8
-#| fig-height: 8
-
-# Your R code for generating the plot
-```
 
 ::: {.callout-caution title="Learning Goals"}
 **Warm-up (together)**
@@ -95,7 +89,6 @@ Construct a plot that allows us to examine how `temp3pm` varies.
 #Add a density plot for quantitive 
 ggplot(weather, aes(x=temp3pm)) +
 geom_density(color = "black", fill = "orange")
-
 ```
 
 ```{r}
@@ -117,7 +110,7 @@ ggplot(weather, aes(x = temp3pm, fill = location)) +
 ```{r}
 # Plot 2 (no facets or densities)
 ggplot(weather, aes(y = temp3pm, x = location)) + 
-  geom_boxplot()
+  geom_boxplot(fill = "yellow")
 ```
 
 ```{r}
@@ -125,6 +118,18 @@ ggplot(weather, aes(y = temp3pm, x = location)) +
 ggplot(weather, aes(x = temp3pm, fill = location)) + 
   geom_density(alpha = 0.5) + 
   facet_wrap(~ location)
+```
+```{r}
+library(ggridges)
+ggplot(weather, aes(x = temp3pm, y = location)) + 
+  geom_density_ridges(aes(fill = location, alpha = 0.5)) +
+  labs(
+    x = "Temperature at 3 PM",
+    y = "Location",
+    title = "Temperature Distributions by Location at 3 PM"
+  ) +
+  theme_minimal()
+  
 ```
 
 # How do afternoon temperatures (`temp3pm`) differ by `location`?
@@ -191,6 +196,7 @@ ggplot(woll, aes(x = raintoday, fill = raintomorrow)) +
 # Side-by-side bars
 ggplot(woll, aes(x = raintoday, fill = raintomorrow)) + 
   geom_bar(position = "dodge")
+#geom_bar(position = "dodge") creates a bar chart where the bars for different groups are placed side by side (horizontally dodged) instead of stacked on top of each other. This makes it easier to compare the categories within each group.
 ```
 
 ```{r}
@@ -228,7 +234,8 @@ ggplot(woll, aes(x=date, y = temp3pm))+
 # draw a line that illustrates the movement of RAW temperatures from day to day
 # NOTE: We haven't learned this geom yet! Guess.
 ggplot(woll, aes(y = temp3pm, x = date)) +
-  geom_line()
+  geom_line(color="red") + 
+  geom_smooth()
 # It was easy 
 ```
 
@@ -303,11 +310,27 @@ geom_point()
 
 ### Example 6 {-}
 
+
 ```{r}
-# Change the code in order to construct a line plot of temp3pm vs date for each separate location (no points!)
-ggplot(weather, aes(y = temp3pm, x = date)) + 
-  geom_line()
+#Change the code in order to construct a line plot of temp3pm vs date for each separate location (no points!)
+#One way :
+ggplot(weather, aes(y = temp3pm, x = date, color = location)) + 
+  geom_line() +
+  geom_smooth(color="black", size = 0.1) # should come after the "facet_wrap(~location) " so it apply the line for each graph.
+
 ```
+
+
+```{r}
+# Another way to do it. 
+ggplot(weather, aes(y = temp3pm, x = date)) + 
+  geom_line(color= "red") +
+  facet_wrap(~location) +
+  geom_smooth(color="black", size = 0.5) # should come after the "facet_wrap(~location) " so it apply the line for each graph.
+
+```
+
+
 
 
 ### Example 7 {-}
@@ -316,7 +339,8 @@ ggplot(weather, aes(y = temp3pm, x = date)) +
 # Plot the relationship of raintomorrow & raintoday
 # Change the code in order to indicate this relationship by location
 ggplot(weather, aes(x = raintoday, fill = raintomorrow)) + 
-  geom_bar(position = "fill")
+  geom_bar(position = "fill") +
+  facet_wrap(~ location)
 ```
 
 
@@ -370,13 +394,15 @@ A codebook is provided by Danny Kaplan who also made these data accessible:
 Construct a plot of how the average `sat` scores vary from state to state. (Just use 1 variable -- `sat` not `State`!)
 
 ```{r}
+ggplot(education, aes(x=sat)) +
+  geom_density(fill = "orange")
 ```
 
 #### Part b {-}
 
 Summarize your observations from the plot. Comment on the basics: range, typical outcomes, shape. (Any theories about what might explain this non-normal shape?)
 
-
+- average SAT scores range from roughly 800 to 1100. They appear bi-modal.
 
 ### Exercise 2: SAT Scores vs Per Pupil Spending & SAT Scores vs Salaries {-}
 
@@ -387,27 +413,37 @@ The first question we'd like to answer is: Can the variability in `sat` scores f
 ```{r}
 # Construct a plot of sat vs expend
 # Include a "best fit linear regression model" (HINT: method = "lm")
-
+ggplot(education, aes(  y = sat, x = expend)) +
+  geom_point(color="red", alpha = 0.5) +
+  geom_smooth(method = "lm")
 ```
 
 ```{r}
 # Construct a plot of sat vs salary
 # Include a "best fit linear regression model" (HINT: method = "lm")
-
+ggplot(education, aes(x=salary, y=sat))+
+  geom_point(color = "purple", alpha = 0.9) +
+  geom_smooth(method = "lm")
 ```
 
 #### Part b {-}
 
 What are the relationship trends between SAT scores and spending? Is there anything that surprises you?
 
+There is a strong, negative relationship between noth amoung of spending and salary with sat outcomes. 
+The graphs show that as both kind of spending increase, the SAT score outcomes decrease. 
+This is surpise find becuase it is counter intuitive. Mostly the logic is that more spending, better SAT score outcome.
 
 ### Exercise 3: SAT Scores vs Per Pupil Spending *and* Teacher Salaries {-}
 
 Construct *one* visualization of the relationship of `sat` with `salary` *and* `expend`. HINT: Start with just 2 variables and tweak that code to add the third variable. Try out a few things!
 
 ```{r}
+# one way 
+ggplot(education, aes(x= salary, color = expend , y=sat))+
+  geom_point(alpha = 0.9) +
+  geom_smooth(method = "lm")
 ```
-
 
 
 ### Exercise 4: Another way to Incorporate Scale {-}
@@ -416,7 +452,7 @@ It can be tough to distinguish color scales and size scales for quantitative var
 
 Construct the plot below. Check out the code and think about what's happening here. What happens if you change "2" to "3"?
 
-```{r eval = FALSE}
+```{r }
 ggplot(education, aes(y = sat, x = salary, color = cut(expend, 2))) + 
   geom_point() + 
   geom_smooth(se = FALSE, method = "lm")
@@ -424,6 +460,7 @@ ggplot(education, aes(y = sat, x = salary, color = cut(expend, 2))) +
 
 Describe the trivariate relationship between `sat`, `salary`, and `expend`.
 
+States with lower salaries and expenditures tend to have higher SAT scores.
 
 ### Exercise 5: Finally an Explanation {-}
 
@@ -434,6 +471,8 @@ It's strange that SAT scores *seem* to decrease with spending. But we're leaving
 Build a univariate viz of `fracCat` to better understand how many states fall into each category.
 
 ```{r}
+ggplot(education, aes(x= fracCat))+
+  geom_bar(fill= "orange")
 ```
 
 #### Part b {-}
@@ -441,20 +480,33 @@ Build a univariate viz of `fracCat` to better understand how many states fall in
 Build 2 bivariate visualizations that demonstrate the relationship between `sat` and `fracCat`. What story does your graphic tell and why does this make contextual sense?
 
 ```{r}
+ggplot(education, aes(x= sat, fill= fracCat)) +
+  geom_density()
 ```
 
-#### Part c {-}
-
-Make a trivariate visualization that demonstrates the relationship of `sat` with `expend` AND `fracCat`. Highlight the differences in `fracCat` groups through color AND unique trend lines. What story does your graphic tell?\
-Does it still seem that SAT scores decrease as spending increases?
 
 ```{r}
+#### Part c {-}
+# Make a trivariate visualization that demonstrates the relationship of `sat` with `expend` AND `fracCat`. Highlight the differences in `fracCat` groups through color AND unique trend lines. 
+ggplot(education, aes(y = sat, x = expend, color = fracCat)) + 
+  geom_point() + 
+  geom_smooth(se = FALSE, method = "lm")
 ```
+# What story does your graphic tell? Does it still seem that SAT scores decrease as spending increases?
+
+The graphic shows different trends between SAT scores and spending across categories (fracCat).
+In the lowest fraction group (red), SAT scores are higher with a slight positive trend as spending increases.
+In the middle group (green), there's a stronger upward trend.
+In the highest fraction group (blue), SAT scores are lower, but still show a slight positive trend with increased spending.
+
 
 #### Part d {-}
 
 Putting all of this together, explain this example of **Simpson’s Paradox**. That is, why did it appear that SAT scores decrease as spending increases even though the *opposite* is true?
 
+When looking at the data without considering group categories (fracCat), SAT scores appeared to decrease as spending increased. This was due to a confounding factor: the proportion of disadvantaged students (fracCat) in each group.
+
+When controlling for fracCat, the relationship between SAT scores and spending changes direction: within each category, higher spending actually correlates with higher SAT scores.
 
 ## Exercises (optional)
 
