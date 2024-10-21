@@ -165,7 +165,7 @@ Take 5 minutes in your groups to try and explain what's going on here. Think: Wh
 ```{r}
 # It happened to be colder outside after renovations (higher hdd)
 ggplot(energy, aes(y = hdd, x = renovated)) + 
-  geom_boxplot() + 
+  geom_boxplot(color = "red") + 
   facet_wrap(~ address)
 
 # When controlling for outside temps (via hdd), energy use decreased post-renovation
@@ -280,13 +280,13 @@ leaflet(data = fave_places)
 ```
 
 ```{r}
-# Now what do we have?
+# Now we create an interactive map. 
 leaflet(data = fave_places) %>% 
   addTiles()
 ```
 
 ```{r}
-# Now what do we have?
+# Now we add markers to the map based on the longitude and latitude columns in the fave_places dataset.
 # longitude and latitude refer to the variables in our data
 leaflet(data = fave_places) %>% 
   addTiles() %>% 
@@ -317,7 +317,7 @@ library(gplots)
 # We can add colored circles instead of markers at each location
 leaflet(data = fave_places) %>% 
   addTiles() %>% 
-  addCircles(color = col2hex("red"))
+  addCircles(color = col2hex("darkorange"))
 ```
 
 ```{r}
@@ -327,7 +327,7 @@ leaflet(data = fave_places) %>%
 # (These green lines don't mean anything here, but would if this were somebody's travel path!)
 leaflet(data = fave_places) %>%
   addProviderTiles("USGS") %>%
-  addCircles(weight = 10, opacity = 1, color = col2hex("yellow")) %>%
+  addCircles(weight = 10, opacity = 1, color = col2hex('red')) %>%
   addPolylines(
     lng = ~longitude,
     lat = ~latitude,
@@ -395,7 +395,7 @@ Let's start with the `ggplot()` tools we already know. Construct a scatterplot o
 It's pretty cool that the plots we already know can provide some spatial context. But what *don't* you like about this plot?
 
 ```{r}
-ggplot(starbucks, aes(y=Latitude, x=Longitude)) + geom_point(size = 0.5)
+ggplot(starbucks, aes(y=Latitude, x=Longitude)) + geom_point(size = 0.3)
 ```
 
 
@@ -441,7 +441,7 @@ ggplot(world_boundaries) +
   geom_point(
     data = starbucks,
     aes(x = Longitude, y = Latitude),
-    alpha = 0.3, size = 0.2, color = "darkgreen"
+    alpha = 0.3, size = 0.2, color = "red"
   ) +
   theme_map()
 ```
@@ -449,6 +449,20 @@ ggplot(world_boundaries) +
 ##### Part c {-}
 
 Summarize what you learned about Starbucks from this map.
+
+library(mosaic): Loads the mosaic package, which simplifies data analysis and visualization.
+
+ggplot(world_boundaries): Initializes a ggplot using the world_boundaries dataset (containing country boundaries).
+
+geom_sf(): Plots the country boundaries using the simple feature format (spatial data format).
+
+geom_point(...): Adds red points for each Starbucks location from the starbucks dataset, using Longitude and Latitude to place them on the map.
+
+data = starbucks: Specifies that Starbucks data is used for plotting points.
+aes(x = Longitude, y = Latitude): Maps the Starbucks longitude to the x-axis and latitude to the y-axis.
+alpha = 0.3, size = 0.2, color = "red": Adjusts the transparency (alpha), size, and color of the points.
+theme_map(): Applies a minimalist map theme to make the plot look like a clean map.
+
 
 
 #### Exercise 5: Zooming in on some countries {-}
@@ -460,6 +474,41 @@ Instead of `world_boundaries <- ne_countries(returnclass = 'sf')` we could zoom 
 -   boundaries within a country: `ne_states(country = 'united states of america', returnclass = 'sf')`
 
 Our goal here will be to map the Starbucks locations in Canada, Mexico, and the US.
+
+```{r}
+# Get the country boundaries for Canada, Mexico, and the US
+north_america <- ne_countries(country = c('Canada', 'United States of America', 'Mexico'), returnclass = 'sf')
+
+# Plot the map and add Starbucks locations
+ggplot(north_america) + 
+  geom_sf() + 
+  geom_point(
+    data = starbucks,  # Assuming starbucks dataset has the locations
+    aes(x = Longitude, y = Latitude),
+    alpha = 0.3, size = 0.2, color = "red"
+  ) +
+  coord_sf(xlim = c(-170, -50), ylim = c(10, 80)) +  # Zooming in on North America
+  theme_map()
+```
+
+```{r}
+# getting one for South Asia
+
+south_asia <- ne_countries(country = c('Afghanistan', 'Pakistan', 'India'), returnclass = 'sf')
+
+# Plot the map and add Starbucks locations
+ggplot(south_asia) + 
+  geom_sf() + 
+  geom_point(
+    data = starbucks,  # Assuming starbucks dataset has locations for South Asia
+    aes(x = Longitude, y = Latitude),
+    alpha = 0.3, size = 0.2, color = "red"
+  ) +
+  coord_sf(xlim = c(60, 100), ylim = c(5, 40)) +  # Zooming in on South Asia
+  theme_map()
+```
+
+
 
 ##### Part a {-}
 
@@ -501,7 +550,7 @@ ggplot(cma_boundaries) +
     aes(x = Longitude, y = Latitude),
     alpha = 0.3,
     size = 0.2,
-    color = "darkgreen"
+    color = "orange"
   ) +
   coord_sf(xlim = c(-179.14, -50)) +
   theme_map()
@@ -545,16 +594,16 @@ head(midwest_boundaries)
 Adjust the code below to make the plot! Remove the `#` to run it.
 
 ```{r}
-# ggplot(___) + 
-#   geom___() + 
-#   geom___(
-#     data = ___,
-#     aes(x = ___, y = ___),
-#     alpha = 0.7,
-#     size = 0.2, 
-#     color = 'darkgreen'
-#   ) + 
-#   theme_map()
+ ggplot(midwest_boundaries) + 
+  geom_sf() + 
+  geom_point(
+     data = starbucks_midwest,
+     aes(x = Longitude, y = Latitude),
+     alpha = 0.7,
+     size = 0.2, 
+     color = 'red'
+   ) + 
+   theme_map()
 ```
 
 
@@ -634,6 +683,7 @@ elections_by_counties <- elections_by_counties %>%
 #### Exercise 8: State-level choropleth maps {-}
 
 Let's map the 2020 Republican support in each *state*, `repub_pct_20`.
+
 
 #### Part a {-}
 
@@ -738,6 +788,7 @@ ggplot(elections_by_state, aes(map_id = state_name, fill = repub_20_categories))
 
 We used `geom_sf()` for point maps. What `geom` do we use for choropleth maps?
 
+We use geom_map()
 
 ### Exercise 9: County-level choropleth maps {-}
 
@@ -799,6 +850,29 @@ ggplot(elections_by_counties, aes(map_id = county_fips, fill = repub_20_categori
 #### Exercise 10: Play around! {-}
 
 Construct county-level maps of `median_rent` and `median_age`.
+
+```{r}
+# county-level maps of `median_rent` and `median_age`.
+ggplot(elections_by_counties, aes(map_id = county_fips, fill = median_rent)) +
+  geom_map(map = county_map) +
+  expand_limits(x = county_map$long, y = county_map$lat) +
+  theme_map() +
+  theme(legend.position = "right") + 
+  coord_equal() + 
+  scale_fill_gradientn(name = "median rent", colors = c("white", "orange", "red"))
+```
+
+
+```{r}
+# For median_age
+ggplot(elections_by_counties, aes(map_id = county_fips, fill = median_age)) +
+  geom_map(map = county_map) +
+  expand_limits(x = county_map$long, y = county_map$lat) +
+  theme_map() +
+  theme(legend.position = "right") + 
+  coord_equal() + 
+  scale_fill_gradientn(name = "median age", colors = terrain.colors(10))
+```
 
 
 #### Exercise 11: Choropleth maps with leaflet {-}
