@@ -15,13 +15,12 @@ book:
     - part: activities/README.qmd
       chapters: 
       - activities/quarto-demo.qmd
-      - activities/data_viz.qmd
-      - activities/Bivariate_viz.qmd
-      - activities/multivariate_viz.qmd
-      - activities/spatial_viz.qmd
-      - activities/effective_viz.qmd
-      
- #     - activities/wrangling_verbs.qmd
+#      - activities/data_viz.qmd
+#      - activities/Bivariate_viz.qmd
+#      - activities/multivariate_viz.qmd
+#      - activities/spatial_viz.qmd
+#      - activities/effective_viz.qmd
+      - activities/wrangling_verbs.qmd
  #     - activities/reshaping_data.qmd
       
       

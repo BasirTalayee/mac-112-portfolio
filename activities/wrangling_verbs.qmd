@@ -158,9 +158,10 @@ select(elections, c(state_name, county_name, dem_pct_20, dem_pct_16))
 
 Let's re-do this with the **pipe function** `|>`:
 
-```{r val = FALSE }
+```{r }
 elections |> 
   select(state_name, county_name, dem_pct_20, dem_pct_16)
+
 ```
 
 \
@@ -183,15 +184,17 @@ elections |>
 
 Let's `filter()` out only the *rows* related to Minnesota (MN):
 
-```{r val = FALSE }
+```{r }
 # Without a pipe
 filter(elections, state_name == "Minnesota")
+
 ```
 
-```{r val = FALSE}
+```{r }
 # With a pipe
-elections |> 
-  filter(state_name == "Minnesota")
+elections |>
+  filter(state_name == "Minnnesota")
+
 ```
 
 \
@@ -204,15 +207,17 @@ We use `a == b` to check whether `a` *matches* `b`.
 
 We use `a = b` to *define* that `a` is equal to `b`. We typically use `=` for this purpose inside a function, and `<-` for this purpose outside a function.
 
-```{r val = FALSE}
+```{r }
 # Ex: "=" defines x
 x = 2
 x
+y = 5
 ```
 
-```{r val = FALSE}
+```{r }
 # Ex: "==" checks whether x is/matches 3
 x == 3
+y == 5
 ```
 :::
 
@@ -225,14 +230,18 @@ x == 3
 
 Let's *combine* `select()` and `filter()` to create a new dataset with info about the county names, and 2020 and 2016 Democratic support among Minnesota counties.
 
-```{r val = FALSE}
+```{r }
 # Without pipes
 filter(select(elections, c(state_name, county_name, dem_pct_20, dem_pct_16)), state_name == "Minnesota")
+
+
 ```
 
-```{r val = FALSE}
+```{r }
 # With pipes: all verbs in 1 row
-elections |> select(state_name, county_name, dem_pct_20, dem_pct_16) |> filter(state_name == "Minnesota")
+elections |> select(state_name, county_name, dem_pct_20, dem_pct_16, repub_pct_20, repub_pct_16) |>
+  filter(state_name %in% c("Minnesota", "Florida")) 
+# if it is one state, only need to use (==) but if it is more than one (%in%). 
 ```
 
 ```{r val = FALSE}
@@ -265,19 +274,24 @@ Why will we typically use:
 Sometimes, the order of operations matters. For example: putting on socks, then shoes produces a different result than putting on shoes, then socks. Sometimes order doesn't matter. For example: Pouring cereal into a bowl, then adding milk produces the same result as pouring milk into a bowl, then adding cereal (though one order is obviously better than the other ;)) Above (also copied below), we `select`ed some columns and then `filter`ed some rows:
 
 ```{r val = FALSE }
+
 elections |> 
   select(state_name, county_name, dem_pct_20, dem_pct_16) |> 
   filter(state_name == "Minnesota")
+
 ```
 
 Would we get the same result if we reversed `select()` and `filter()`? Think first, then try it.
 
-```{r eval = FALSE }
-Part c
-It’s more “computationally efficient” to get rid of some rows before arranging.
+```{r }
+# sometimes the order don't make a difference. 
+MN1 <- elections |> 
+  select(state_name, county_name, dem_pct_20, dem_pct_16) |> 
+  filter(state_name == "Minnesota")
 
-Part e
-We can’t select a variable before we define it!
+MN2 <- elections |> 
+  filter(state_name == "Minnesota") |>
+  select(state_name, county_name, dem_pct_20, dem_pct_16)
 ```
 
 \
